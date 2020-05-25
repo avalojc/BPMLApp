@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+.leftRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.leftForm {
+  /* color: red; */
+  text-align: right;
+  padding: 3px;
+}
+.rightForm{
+  /* color: blue; */
+  padding: 3px;
+}
+.button{
+  /* color: green; */
+}
+form{
+  padding: 3px;
+}
+.headingDisclaimer p{
+  color: blue;
+  width: 75%;
+  max-width: 1000px;
+  align-self:   center;
+  justify-self: center;
+}
+.headingDisclaimer{
+  display: flex;
+  flex-direction: column;
+}

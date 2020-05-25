@@ -10,16 +10,17 @@ export class MainMLForm extends Component {
         testHR: null,
         testHRRegularity: null,
         testCuffSize: null,
-        HRInput:null,
-        HRRegularityInput: null,
-        cuffInput: null,
-        stateReady: 0
+        inputHR:null,
+        inputHRRegularity: null,
+        inputCuff: null,
+        stateReady: 0,
+        responseValue: null,
     }
     cuffValidation = () => {
-        // console.log(this.state.cuffInput)
+        // console.log(this.state.inputCuff)
         // console.log(2)
         // console.log("2")
-        switch(this.state.cuffInput){
+        switch(this.state.inputCuff){
             case "2":
                 this.setState({testCuffSize: 2})
                 break;
@@ -38,7 +39,7 @@ export class MainMLForm extends Component {
         }
     }
     HRRegularityValidation = () => {
-        switch(this.state.HRRegularityInput){
+        switch(this.state.inputHRRegularity){
             case "0":
             // case 'R':
             // case 'Regular':
@@ -60,21 +61,21 @@ export class MainMLForm extends Component {
     }
     onNewHRAdd = (event) => {
         const hR = event.target.value;
-        this.setState({HRInput: hR})
+        this.setState({inputHR: hR})
     }
     onNewHRRegularityAdd = (event) => {
         const hRReg = event.target.value;
-        this.setState({HRRegularityInput: hRReg})
+        this.setState({inputHRRegularity: hRReg})
     }
     onNewCuffSizeAdd = (event) => {
         const cuff = event.target.value;
-        this.setState({cuffInput: cuff})
+        this.setState({inputCuff: cuff})
     }
     inputValidation = (event) => {
         event.preventDefault()
         this.cuffValidation()   
         this.HRRegularityValidation()
-        this.setState({testHR: parseInt(this.state.HRInput,10)})
+        this.setState({testHR: parseInt(this.state.inputHR,10)})
         this.createPredictionObj()
     }
     createPredictionObj=()=>{
@@ -127,11 +128,26 @@ export class MainMLForm extends Component {
                 this.setState({testPrediction: "hello"})
         }
     }
+    // componentDidMount(){
+    //     fetch('http://localhost:12345/predict')
+    //     .then(res => res.json())
+    //     .then((data)=>{
+    //         this.setState({responseValue:data})
+    //     })
+    //     .catch(console.log)
+    // }
+//     predict = (objectToPost) => {
+// //        axios.post('http://localhost:12345/predict',objectToPost)
+//         .then(function(response){
+//             console.log(response)
+//         })
 
+    }
 
     render() {
         return (
             <form>
+                <div className='leftRight'>
                 <div className='leftForm'>
                     Heart Rate (0-500): <br/>
                     Heart Rate Regularity (0-1): <br/>
@@ -163,7 +179,9 @@ export class MainMLForm extends Component {
                         value={this.state.newCuffSize}
                     /> 
                 </div>
+                </div>
                 <input 
+                    className='button'
                     type='submit'
                     onClick={this.inputValidation}
                 />
