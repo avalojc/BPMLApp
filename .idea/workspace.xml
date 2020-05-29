@@ -4,8 +4,13 @@
     <list default="true" id="3a70ec56-b645-40da-a014-96191434ddb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ML0.py" beforeDir="false" afterPath="$PROJECT_DIR$/ML0.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NHANESbloodpressuredata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/NHANESbloodpressuredata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/model.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/MLAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/components/MLForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/components/MLForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/components/MLResponse.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/components/MLResponse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/components/mainml.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/components/mainml.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +32,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -108,7 +114,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

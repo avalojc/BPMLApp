@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-// import {    Link  } from "react-router-dom";
-//import axios from 'axios'
-//import NearEarthObjects from './NearEarthObjects'
-// import LastUpdate from './LastUpdate'
+import axios from 'axios'
 
 export class MainMLForm extends Component {
+    // create state for test values and input validations.
     state = {
         testPrediction: null,
         testHR: null,
@@ -16,10 +14,8 @@ export class MainMLForm extends Component {
         stateReady: 0,
         responseValue: null,
     }
+    //validation
     cuffValidation = () => {
-        // console.log(this.state.inputCuff)
-        // console.log(2)
-        // console.log("2")
         switch(this.state.inputCuff){
             case "2":
                 this.setState({testCuffSize: 2})
@@ -38,39 +34,38 @@ export class MainMLForm extends Component {
                 break;
         }
     }
+    //validation
     HRRegularityValidation = () => {
         switch(this.state.inputHRRegularity){
-            case "0":
-            // case 'R':
-            // case 'Regular':
-                this.setState({testHRRegularity: 0})
-                break;
-            case "1":
+            case "true":
+            case "t":
                 this.setState({testHRRegularity: 1})
                 break;
-            // case 'I':
-            //     this.setState({testHRRegularity: 1})
-            //     break;
-            // case 'Irregular':
-            //     this.setState({testHRRegularity: 1})
-            //     break;
+            case "false":
+            case "f":
+                this.setState({testHRRegularity: 2})
+                break;
             default:
-                alert('Your input must be Regular(0) or Irregular(1)')
+                alert('Your input must be Regular(true) or Irregular(false)')
                 break;
         }
     }
+    // set heart rate
     onNewHRAdd = (event) => {
         const hR = event.target.value;
         this.setState({inputHR: hR})
     }
+    //set heart rate regularity
     onNewHRRegularityAdd = (event) => {
-        const hRReg = event.target.value;
+        const hRReg = event.target.value.toLowerCase();
         this.setState({inputHRRegularity: hRReg})
     }
+    // set cuff size
     onNewCuffSizeAdd = (event) => {
         const cuff = event.target.value;
         this.setState({inputCuff: cuff})
     }
+    // run all input validations and set states
     inputValidation = (event) => {
         event.preventDefault()
         this.cuffValidation()   
@@ -78,6 +73,7 @@ export class MainMLForm extends Component {
         this.setState({testHR: parseInt(this.state.inputHR,10)})
         this.createPredictionObj()
     }
+    // create prediction object to send to back end.
     createPredictionObj=()=>{
         switch(this.state.testCuffSize){
             case 2:
@@ -127,49 +123,63 @@ export class MainMLForm extends Component {
             default:
                 this.setState({testPrediction: "hello"})
         }
+        if(this.state.stateReady === 1){
+            this.predict(this.state.testPrediction)
+        }
     }
-    // componentDidMount(){
-    //     fetch('http://localhost:12345/predict')
-    //     .then(res => res.json())
-    //     .then((data)=>{
-    //         this.setState({responseValue:data})
-    //     })
-    //     .catch(console.log)
-    // }
-//     predict = (objectToPost) => {
-// //        axios.post('http://localhost:12345/predict',objectToPost)
-//         .then(function(response){
-//             console.log(response)
-//         })
-
-    }
-
+        // send prediction object return prediction.
+    predict = (objectToPost) => {
+        (axios.post('/predict',objectToPost))
+        .then(function(response){
+            if(response.data.prediction[1]==1){
+                document.getElementById('predict').innerHTML = 'The patient is at risk'
+            } else{
+                document.getElementById('predict').innerHTML = 'The patient is not at risk'
+            }
+        })
+        .catch(function(error){
+            console.log(error)
+        })            // WIP in progress for a connection to gcp ml model
+        //nhanes-bp-ml //nhanesbp_20200521085117
+        // axios.post('https://ml.googleapis.com/v1/projects/nhanes-bp-ml/models/nhanesbp_20200521085117:predict', objectToPost)
+        // .then(function(response){
+        //     console.log(response)
+        // })
+        // .catch(function(error){
+        //     console.log(error)
+        // })
+   }
+        // render form
     render() {
         return (
             <form>
-                <div className='leftRight'>
-                <div className='leftForm'>
-                    Heart Rate (0-500): <br/>
-                    Heart Rate Regularity (0-1): <br/>
-                    Cuff Size (2-5):
-                </div>
                 <div className='rightForm'>
+                    <p className='formBlurb'>Required*</p>
                     <input
                         type="string"
                         name="HR"
-                        placeholder="Heart Rate"
+                        placeholder="Heart Rate (BPM)"
                         required="required"
                         onChange={this.onNewHRAdd}
                         value={this.state.newTestHR}
-                    /> <br/>
+                    />
+                    <p className='formBlurb'>Required* (true for regular, false for irregular heart beats)</p>
                     <input
                         type="string"
                         name="HRReg"
-                        placeholder="Heart Rate Regularity"
+                        placeholder="Is the heart rate regular? True or false."
                         required="required"
                         onChange={this.onNewHRRegularityAdd}
                         value={this.state.newTestHRReg}
-                    /> <br/>
+                    /> 
+                    <p className='formBlurb'>
+                        Required*    
+                        <a className='tooltip' href=''>
+                            &ensp; Hover here for more information on cuff sizes
+                            <span>
+                            </span>
+                        </a>
+                    </p>
                     <input
                         type="string"
                         name="CuffSize"
@@ -179,12 +189,7 @@ export class MainMLForm extends Component {
                         value={this.state.newCuffSize}
                     /> 
                 </div>
-                </div>
-                <input 
-                    className='button'
-                    type='submit'
-                    onClick={this.inputValidation}
-                />
+                <button className='button' onClick={this.inputValidation}><span>Submit</span></button>
             </form>
         )
     }

@@ -1,5 +1,17 @@
+#root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
+  min-width: 250px;
 }
 
 .App-logo {
@@ -42,29 +54,132 @@
   align-items: center;
   justify-content: center;
 }
-.leftForm {
-  /* color: red; */
-  text-align: right;
-  padding: 3px;
-}
 .rightForm{
-  /* color: blue; */
-  padding: 3px;
+  width: 100%;
 }
 .button{
-  /* color: green; */
+  background-color: rgb(83, 76, 175);
+  border: none;
+  color: white;
+  padding: 10.5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px 0px;
+}
+
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.formBlurb{
+  margin: 0px;
+  font-size: .7em;
+  color: gray;
+  text-align: left;
+  padding-left: 15px;
+}
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 form{
-  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 5px;
+}
+
+input{
+  width: 98%;
+  border: 0px;
+  padding: 12px 0px 12px 10px;
+  margin: 5px 0px 5px 0px;
 }
 .headingDisclaimer p{
-  color: blue;
-  width: 75%;
+  color: rgb(46, 76, 93);
+  width: 50%;
   max-width: 1000px;
   align-self:   center;
   justify-self: center;
+  text-align: justify;
+}
+.headingDisclaimer h1{
+  width: 75%;
+  max-width: 667px;
 }
 .headingDisclaimer{
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+html{
+  background-position: right;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: rgb(219, 245, 250);
+  background-position-y: -20;
+}
+
+
+form, input, button {
+  border-radius: 12.5px;
+}
+
+.tooltip {
+  text-decoration:none;
+  position:relative;
+}
+ 
+.tooltip span {
+  display:none;
+  border-radius:6px;
+  color:black;
+  background:white; 
+}
+ 
+.tooltip span img {
+  float:left;
+  margin:0px 8px 8px 0;
+}
+ 
+.tooltip:hover span {
+  background-image: url(./img/sizechart.jpg);
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1000;
+  width:230px;
+  min-height:365px;
+  border:1px solid black;
+  margin-top:12px;
+  margin-left:32px;
+  overflow:hidden;
+  padding:8px;
 }
